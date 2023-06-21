@@ -27,7 +27,7 @@ const PromptCard = ({ post, handleEdit, handleDelete, handleTagClick }) => {
         setTimeout(() => setCopied(false), 3000);
     };
 
-    console.log(post.prompt.length > 200)
+
     return (
         <div className='prompt_card'>
             <div className='flex justify-between items-start gap-5'>
@@ -44,22 +44,23 @@ const PromptCard = ({ post, handleEdit, handleDelete, handleTagClick }) => {
                     />
 
                     <div className='flex flex-col'>
-                        <h3 className='font-satoshi font-semibold text-gray-900'>
+                        <h3 className='font-satoshi font-semibold text-gray-900 dark:text-cyan-200'>
                             {post.creator.username}
                         </h3>
-                        <p className='font-inter text-sm text-gray-500'>
+                        <p className='font-inter text-sm text-gray-500 dark:text-red-300'>
                             {post.creator.email}
                         </p>
                     </div>
                 </div>
 
-                <div className='copy_btn' onClick={handleCopy}>
+                <div className='copy_btn dark:bg-zinc-100' onClick={handleCopy}>
                     <Image
                         src={
                             copied === post.prompt
                                 ? "/assets/icons/tick.svg"
                                 : "/assets/icons/copy.svg"
                         }
+
                         alt={copied === post.prompt ? "tick_icon" : "copy_icon"}
                         width={12}
                         height={12}
@@ -67,9 +68,9 @@ const PromptCard = ({ post, handleEdit, handleDelete, handleTagClick }) => {
                 </div>
             </div>
 
-            <p className='my-4 font-satoshi text-sm text-gray-700'>{seemore ? post.prompt : post.prompt.substring(0, 200)}...{((post.prompt.length > 200 && !seemore) && <span className="text-blue-900 font-bold underline cursor-pointer" onClick={() => setSeeMore(true)}>see more</span>) || (seemore && <span className="text-blue-900 font-bold underline cursor-pointer" onClick={() => setSeeMore(false)}>see less</span>)}</p>
+            <p className='my-4 font-satoshi text-sm text-gray-700 dark:text-white'>{seemore ? post.prompt : post.prompt.substring(0, 200)}...{((post.prompt.length > 200 && !seemore) && <span className="text-blue-900 font-bold underline cursor-pointer dark:text-sky-400" onClick={() => setSeeMore(true)}>see more</span>) || (seemore && <span className="text-blue-900 font-bold underline cursor-pointer dark:text-sky-400" onClick={() => setSeeMore(false)}>see less</span>)}</p>
             <p
-                className='font-inter text-sm blue_gradient cursor-pointer'
+                className='font-inter text-sm blue_gradient cursor-pointer dark:text-amber-400'
                 onClick={() => handleTagClick && handleTagClick(post.tag)}
             >
                 #{post.tag}
@@ -78,13 +79,13 @@ const PromptCard = ({ post, handleEdit, handleDelete, handleTagClick }) => {
             {session?.user.id === post.creator._id && pathName === "/profile" && (
                 <div className='mt-5 flex-center gap-4 border-t border-gray-100 pt-3'>
                     <p
-                        className='font-inter text-sm green_gradient cursor-pointer'
+                        className='font-inter text-sm green_gradient cursor-pointer dark:text-white'
                         onClick={handleEdit}
                     >
                         Edit
                     </p>
                     <p
-                        className='font-inter text-sm orange_gradient cursor-pointer'
+                        className='font-inter text-sm orange_gradient cursor-pointer dark:text-amber-100'
                         onClick={handleDelete}
                     >
                         Delete

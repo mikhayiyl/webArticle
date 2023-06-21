@@ -168,3 +168,9 @@
 .flex-between {
   @apply flex justify-between items-center;
 }
+
+@layer base {
+  body {
+    @apply dark:bg-gray-800 bg-white;
+  }
+}

@@ -1,10 +1,10 @@
-
 "use client";
-
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { signIn, signOut, useSession, getProviders } from "next-auth/react";
+
+import { useTheme } from "next-themes";
 
 const Nav = () => {
     const { data: session } = useSession();
@@ -20,7 +20,10 @@ const Nav = () => {
         populateProviders();
     }, []);
 
-    const signOut = async () => { };
+
+
+    const { systemTheme, theme, setTheme } = useTheme();
+
 
 
 
@@ -33,18 +36,20 @@ const Nav = () => {
                     height={30}
                     className="object-contain"
                 />
-                <p className="logo_text">Promptopia</p>
+                <p className="logo_text dark:text-amber-300">Promptopia</p>
             </Link>
 
-            {/* /mobile nav */}
+            {/* desktop nav */}
 
             <div className="sm:flex hidden">
                 {session?.user ?
                     <div className="flex gap-3 md:gap-5">
-                        <Link href='/create-prompt' className="black_btn">
+                        <Link href='/create-prompt' className="black_btn  dark:text-black dark:bg-slate-200">
                             create post
                         </Link>
-                        <button type="button" className="outline_btn">
+                        <button type="button"
+                            onClick={signOut}
+                            className="outline_btn  dark:text-black dark:bg-slate-200">
                             Sign Out
                         </button>
                         <Link href="/profile">
@@ -65,7 +70,7 @@ const Nav = () => {
                                 type="button"
                                 key={p.name}
                                 onClick={() => signIn(p.id)}
-                                className="black_btn"
+                                className="black_btn dark:bg-yellow-200 dark:text-zinc-950"
                             >
                                 Sign In
                             </button>))}
@@ -73,6 +78,20 @@ const Nav = () => {
 
                 }
             </div>
+            <div className='copy_btn dark:bg-zinc-100 absolute right-1 gap-3' onClick={() => theme == "dark" ? setTheme('light') : setTheme("dark")}>
+                <Image
+                    src={
+                        theme === "dark"
+                            ? "/assets/icons/moon.svg"
+                            : "/assets/icons/sun.svg"
+                    }
+
+                    alt={theme === "dark" ? "moon.svg" : "sun.svg"}
+                    width={12}
+                    height={12}
+                />
+            </div>
+
 
             {/* mobile nav */}
             <div className="sm:hidden flex relative">
@@ -81,22 +100,22 @@ const Nav = () => {
                         src={session?.user.image}
                         width={37}
                         height={37}
-                        className="rounded-full"
+                        className="rounded-full mr-5 cursor-pointer"
                         alt="profile"
                         onClick={() => settoggleDropDown(prev => !prev)}
                     />
 
                     {toggleDropDown &&
-                        <div className="dropdown">
+                        <div className="dropdown ">
                             <Link href="/profile"
-                                className="dropdown-link"
+                                className="dropdown-link  dark:text-slate-900 font-bold"
                                 onClick={() => settoggleDropDown(false)}
                             >My Profile
                             </Link>
                             <Link href="/create-prompt"
-                                className="dropdown-link"
+                                className="dropdown-link  dark:text-slate-900 font-bold"
                                 onClick={() => settoggleDropDown(false)}
-                            >Create Prompt
+                            >Create Post
                             </Link>
                             <button type="button"
                                 onClick={() => {
@@ -117,7 +136,7 @@ const Nav = () => {
                             type="button"
                             key={p.name}
                             onClick={() => signIn(p.id)}
-                            className="black_btn"
+                            className="black_btn dark:bg-white dark:text-slate-950 mr-7"
                         >
                             Sign In
                         </button>))}

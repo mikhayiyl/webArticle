@@ -5,6 +5,7 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  darkMode: 'class', // Enable dark mode using the class-based approach
   theme: {
     extend: {
       fontFamily: {
@@ -13,8 +14,14 @@ module.exports = {
       },
       colors: {
         'primary-orange': '#FF5722',
-      }
+      },
+    },
+  },
+  variants: {
+    extend: {
+      backgroundColor: ['dark'],
+      textColor: ['dark'],
     },
   },
   plugins: [],
-}
+};

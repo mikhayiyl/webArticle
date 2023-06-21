@@ -1,6 +1,8 @@
+"use client";
 import Nav from '@app/components/Nav';
 import Provider from '@app/components/Provider';
 import '@styles/globals.css';
+import { ThemeProvider } from "next-themes"
 
 
 export const metadata = {
@@ -12,17 +14,20 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <Provider>
-          <div className="main">
-            <div className="gradient">
+        <ThemeProvider attribute="class">
+          <Provider>
+            <div className="main">
+              <div className="gradient">
+              </div>
             </div>
-          </div>
-          <main className="app">
-            <Nav />
-            {children}
-          </main>
-        </Provider>
+            <main className="app bg-white dark:bg-slate-800 ">
+              <Nav />
+              {children}
+            </main>
+          </Provider>
+        </ThemeProvider>
       </body>
     </html>
   )
 }
+
