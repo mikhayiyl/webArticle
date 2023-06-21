@@ -22,7 +22,7 @@ const Form = ({ type,
                         onChange={e => setpost({ ...post, prompt: e.target.value })}
                         placeholder="write your prompt here ..."
                         required
-                        className="form_textarea"
+                        className="form_textarea dark:text-white"
                     />
                 </label>
                 <label >
@@ -34,7 +34,7 @@ const Form = ({ type,
                         onChange={e => setpost({ ...post, tag: e.target.value })}
                         placeholder="#tag"
                         required
-                        className="form_input"
+                        className="form_input dark:text-white"
                     />
                 </label>
                 <div className="flex-end mx-3 mb-5 gap-4">
